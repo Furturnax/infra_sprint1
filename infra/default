@@ -1,20 +1,19 @@
 server {
+    server_name 158.160.18.253 drewfed.gotdns.ch;
 
-        server_name 158.160.18.253 drewfed.gotdns.ch;
+    location /api/ {
+        proxy_pass http://127.0.0.1:8000;
+    }
 
-        location /api/ {
-                proxy_pass http://127.0.0.1:8000;
-        }
+    location /admin/ {
+        proxy_pass http://127.0.0.1:8000;
+    }
 
-        location /admin/ {
-                proxy_pass http://127.0.0.1:8000;
-        }
-
-        location / {
-                root /var/www/taski;
-                index index.html index.html;
-                try_files $uri /index.html;
-        }
+    location / {
+        root /var/www/taski;
+        index index.html index.html;
+        try_files $uri /index.html;
+    }
 
     listen 443 ssl; # managed by Certbot
     ssl_certificate /etc/letsencrypt/live/drewfed.gotdns.ch/fullchain.pem; # managed by Certbot
@@ -23,6 +22,7 @@ server {
     ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem; # managed by Certbot
 
 }
+
 server {
     if ($host = drewfed.gotdns.ch) {
         return 301 https://$host$request_uri;
@@ -39,33 +39,26 @@ server {
 
 
 server {
+    server_name 158.160.18.253 drewkitty.gotdns.ch;
+    client_max_body_size 20M;
 
-        server_name 158.160.18.253 drewkitty.gotdns.ch;
+    location /api/ {
+        proxy_pass http://127.0.0.1:8080;
+    }
 
-        location /media/ {
-                alias /var/www/kittygram/media/;
+    location /admin/ {
+        proxy_pass http://127.0.0.1:8080;
+    }
 
-        }
+    location /media/ {
+        alias /var/www/kittygram/media/;
+    }
 
-
-        location /admin/ {
-                proxy_pass http://127.0.0.1:8080;
-                client_max_body_size 20M;
-        }
-
-
-        location /api/ {
-                proxy_pass http://127.0.0.1:8080;
-                client_max_body_size 20M;
-        }
-
-
-        location / {
-                root /var/www/kittygram;
-                index index.html index.htm;
-                try_files $uri /index.html;
-        }
-
+    location / {
+        root   /var/www/kittygram;
+        index  index.html index.htm;
+        try_files $uri /index.html;
+    }
 
     listen 443 ssl; # managed by Certbot
     ssl_certificate /etc/letsencrypt/live/drewkitty.gotdns.ch/fullchain.pem; # managed by Certbot
@@ -91,3 +84,4 @@ server {
 
 
 }
+
