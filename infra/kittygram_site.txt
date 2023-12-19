@@ -1,5 +1,5 @@
 IP: 158.160.18.253;
 name_taski: https://drewfed.gotdns.ch/;
-name_kittygram: https://drewkitty.gotdns.ch/signin;
+name_kittygram: https://drewkitty.gotdns.ch/;
 login: skydym;
 password: 123123qqq;
